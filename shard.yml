@@ -1,0 +1,19 @@
+name: dcr
+version: 1.0.0
+
+authors:
+  - David Tyler <davet.code@gmail.com>
+
+targets:
+  dcr:
+    main: src/dcr.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  crest:
+    github: mamantoha/crest
+
+crystal: 1.0.0
+
+license: MIT
