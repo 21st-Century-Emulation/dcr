@@ -1,4 +1,4 @@
-require "crest"
+require "http/client"
 require "json"
 require "kemal"
 
