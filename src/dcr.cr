@@ -71,10 +71,10 @@ post "/api/v1/execute" do |env|
     set_flags(state.b, state.flags)
   when 0x35 then # DCR (HL)
     address = (state.h.to_u16 << 8) | state.l.to_u16
-    get_request = Crest.get(READ_MEMORY_API, params: {:id => cpu.id, :address => address.to_i})
+    get_request = HTTP::Client.get "#{READ_MEMORY_API}?id=#{cpu.id}&address=#{address}"
     value = get_request.body.to_u8 &- 1
     set_flags(value, state.flags)
-    Crest.post(WRITE_MEMORY_API, params: {:id => cpu.id, :address => address.to_i, :value => value.to_i})
+    HTTP::Client.post "#{WRITE_MEMORY_API}?id=#{cpu.id}&address=#{address}&value=#{value}"
     state.cycles &+= 5 # 5 additional cycles for memory access
   when 0x3D then # DCR A
     state.a &-= 1
